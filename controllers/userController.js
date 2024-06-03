@@ -89,15 +89,15 @@ const loginController = async (req, res) => {
   }
 };
 
-// const logoutController = async (req, res) => {
-//   return res
-//     .cookie("token", "", {
-//       httpOnly: true,
-//       secure: true,
-//       expires: new Date(0),
-//     }) // to remove cookies from browser cookies
-//     .status(200)
-//     .send({ success: true, message: "Logout Successfull" });
-// };
+const logoutController = async (req, res) => {
+  return res
+    .cookie("token", "", {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(0),
+    }) // to remove cookies from browser cookies
+    .status(200)
+    .send({ success: true, message: "Logout Successfull" });
+};
 
 export { registerController, loginController, logoutController };
