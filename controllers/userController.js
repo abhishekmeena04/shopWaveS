@@ -99,15 +99,19 @@ const logoutController = async (req, res) => {
     .status(200)
     .send({ success: true, message: "Logout Successfull" });
 };
-const middleware = async (req, res) => {
+
+const rememberMe = async (req, res) => {
   return res
     .cookie("token", "", {
       httpOnly: true,
       secure: true,
       expires: new Date(0),
-    }) 
+    }) // to remove cookies from browser cookies
     .status(200)
-    .send({ success: true, message: "middleware created" });
+    .send({ success: true, message: "Logout Successfull" });
+  return res
+    .status(400)
+    .send({ success: false, message: "error in rememberMe", error });
 };
 
 export { registerController, loginController, logoutController };
