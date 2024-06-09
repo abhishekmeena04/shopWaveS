@@ -2,46 +2,46 @@ import { encryptPassword, matchPassword } from "../helper/userHelper.js";
 import userModal from "../models/userModal.js";
 import jwt from "jsonwebtoken";
 
-// const registerController = async (req, res) => {
-//   try {
-//     const { name, email, password } = req.body;
+const registerController = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-//     // all fields are required to fill
-//     if (!name || !email || !password) {
-//       return res
-//         .status(400)
-//         .send({ success: false, message: "All fields are required" });
-//     }
+    // all fields are required to fill
+    if (!name || !email || !password) {
+      return res
+        .status(400)
+        .send({ success: false, message: "All fields are required" });
+    }
 
-//     // checking your email already exist or not
-//     const isExist = await userModal.findOne({ email });
-//     if (isExist) {
-//       return res
-//         .status(400)
-//         .send({ success: false, message: "Email already exists" });
-//     }
+    // checking your email already exist or not
+    const isExist = await userModal.findOne({ email });
+    if (isExist) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Email already exists" });
+    }
 
-//     // encrypting user password
-//     const hashedPassword = await encryptPassword(password);
+    // encrypting user password
+    const hashedPassword = await encryptPassword(password);
 
-//     // creating new user
-//     const newUser = await userModal.create({
-//       name,
-//       email,
-//       password: hashedPassword,
-//     });
-//     return res.status(201).send({
-//       success: true,
-//       message: "User registration successfully",
-//       newUser,
-//     });
-//   } catch (error) {
-//     console.log(`Register Controller Error ${error}`);
-//     return res
-//       .status(400)
-//       .send({ success: false, message: "error in registerController", error });
-//   }
-// };
+    // creating new user
+    const newUser = await userModal.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+    return res.status(201).send({
+      success: true,
+      message: "User registration successfully",
+      newUser,
+    });
+  } catch (error) {
+    console.log(`Register Controller Error ${error}`);
+    return res
+      .status(400)
+      .send({ success: false, message: "error in registerController", error });
+  }
+};
 const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
