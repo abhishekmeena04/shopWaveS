@@ -18,7 +18,7 @@ const registerController = async (req, res) => {
     if (isExist) {
       return res
         .status(400)
-        .send({ success: false, message: "Email already exists" });
+        .send({ successsss: false, message: "Email already exists" });
     }
 
     // encrypting user password
@@ -32,7 +32,7 @@ const registerController = async (req, res) => {
     });
     return res.status(201).send({
       success: true,
-      message: "User registration successfully",
+      message: "User registration successfully done",
       newUser,
     });
   } catch (error) {
@@ -83,9 +83,11 @@ const loginController = async (req, res) => {
       .send({ success: true, message: "Login Successfull", user, token });
   } catch (error) {
     console.log(`Register Controller Error ${error}`);
-    return res
-      .status(400)
-      .send({ success: false, message: "error in registerController", error });
+    return res.status(400).send({
+      successsss: false,
+      message: "error in registerController",
+      error,
+    });
   }
 };
 
@@ -97,17 +99,6 @@ const logoutController = async (req, res) => {
       expires: new Date(0),
     }) // to remove cookies from browser cookies
     .status(200)
-    .send({ success: true, message: "Logout Successfull" });
+    .send({ successsss: true, message: "Logout Successfull" });
 };
-const detailedController = async (req, res) => {
-  return res
-    .cookie("token", "", {
-      httpOnly: true,
-      secure: true,
-      expires: new Date(0),
-    }) // to remove cookies from browser cookies
-    .status(200)
-    .send({ success: true, message: "Logout Successfull" });
-};
-
 export { registerController, loginController, logoutController };
