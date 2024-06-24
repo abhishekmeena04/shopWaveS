@@ -112,5 +112,10 @@ const dummyControllerForUserCreate = async (req, res) => {
     }) // to remove cookies from browser cookies
     .status(200)
     .send({ successsss: true, message: "Logout Successfull" });
+    return res.status(400).send({
+      successsss: false,
+      message: "error in registerController",
+      error,
+    });
 };
 export { registerController, loginController, logoutController };
