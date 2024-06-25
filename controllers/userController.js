@@ -103,19 +103,4 @@ const logoutController = async (req, res) => {
 };
 export { registerController, loginController, logoutController };
 
-const dummyControllerForUserCreate = async (req, res) => {
-  return res
-    .cookie("token", "", {
-      httpOnly: true,
-      secure: true,
-      expires: new Date(0),
-    }) // to remove cookies from browser cookies
-    .status(200)
-    .send({ successsss: true, message: "Logout Successfull" });
-    return res.status(400).send({
-      successsss: false,
-      message: "error in registerController",
-      error,
-    });
-};
 export { registerController, loginController, logoutController };
