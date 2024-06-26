@@ -101,6 +101,46 @@ const logoutController = async (req, res) => {
     .status(200)
     .send({ successsss: true, message: "Logout Successfull" });
 };
+const adminRegisterController = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // all fields are required to fill
+    if (!name || !email || !password) {
+      return res
+        .status(400)
+        .send({ success: false, message: "All fields are required" });
+    }
+
+    // checking your email already exist or not
+    const isExist = await userModal.findOne({ email });
+    if (isExist) {
+      return res
+        .status(400)
+        .send({ successsss: false, message: "Email already exists" });
+    }
+
+    // encrypting user password
+    const hashedPassword = await encryptPassword(password);
+
+    // creating new user
+    const newUser = await userModal.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+    return res.status(201).send({
+      success: true,
+      message: "User registration successfully done",
+      newUser,
+    });
+  } catch (error) {
+    console.log(`Register Controller Error ${error}`);
+    return res
+      .status(400)
+      .send({ success: false, message: "error in registerController", error });
+  }
+};
 export { registerController, loginController, logoutController };
 
 export { registerController, loginController, logoutController };
